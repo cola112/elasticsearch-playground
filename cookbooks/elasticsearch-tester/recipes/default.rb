@@ -21,3 +21,34 @@ execute 'run_install-elasticsearch' do
     user 'root'
     action :nothing
 end
+
+remote_file '/tmp/kibana.tar.gz' do
+    source 'https://download.elastic.co/kibana/kibana/kibana-4.1.2-linux-x64.tar.gz'
+    checksum '5f6213f7ac7ef71016a6750f09e7316ccc9bca139bc5389b417395b179bc370c'
+    notifies :run, 'bash[run_installKibana]', :immediately
+end
+
+bash 'run_installKibana' do
+  user 'root'
+  code <<-EOC
+    cd /tmp
+	tar xvf /tmp/kibana.tar.gz
+    mkdir -p /opt/kibana
+    cp -R /tmp/kibana-4*/* /opt/kibana/
+  EOC
+end
+
+remote_file '/etc/init.d/kibana4' do
+    source 'https://gist.githubusercontent.com/thisismitch/8b15ac909aed214ad04a/raw/bce61d85643c2dcdfbc2728c55a41dab444dca20/kibana4'
+    checksum 'dfee621eb9e516ccca95e31c41284f8eb76807c25efa4d93a06de86b298dd08c'
+    notifies :run, 'bash[run_installKibanaService]', :immediately
+end
+
+bash 'run_installKibanaService' do
+  user 'root'
+  code <<-EOC
+    chmod +x /etc/init.d/kibana4
+    update-rc.d kibana4 defaults 96 9
+    service kibana4 start
+  EOC
+end
