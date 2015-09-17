@@ -3,7 +3,8 @@
 
 Vagrant.configure(2) do |config|
 
-  config.vm.box = "base"
+  #config.vm.box = "base"
+  config.vm.box = "chef/ubuntu-14.04"
 
   config.vm.host_name = "es-playground"
 
