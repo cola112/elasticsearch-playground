@@ -1,4 +1,5 @@
-#Elasticsearch-tester
+#Elasticsearch-playground
+
 
 由Vargant及Chef-Solo建構而成的Elasticsearch測試環境，純供學習及研究之用。
 
