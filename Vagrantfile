@@ -16,6 +16,6 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision "chef_solo" do |chef|
   chef.cookbooks_path = ["cookbooks"]
-  chef.add_recipe "estester::default"
+  chef.add_recipe "elasticsearch-tester::default"
   end
 end

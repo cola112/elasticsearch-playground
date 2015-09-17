@@ -1,4 +1,4 @@
-name              "Elasticsearch-tester"
+name              "elasticsearch-tester"
 maintainer        "Mr.Twister"
 maintainer_email  "sardo.ip@sardo.work"
 license           "Apache 2.0"
