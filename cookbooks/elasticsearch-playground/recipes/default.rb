@@ -6,9 +6,12 @@ bash 'Install Java' do
     apt-get update
     echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
     echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections
-    sudo apt-get -y install oracle-java7-installer
+    #sudo apt-get -y install oracle-java7-installer
   EOC
 end
+
+package 'oracle-java7-installer'
+
 
 remote_file '/tmp/elasticsearch.deb' do
     source 'https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.2.deb'
@@ -32,7 +35,7 @@ bash 'run_installKibana' do
   user 'root'
   code <<-EOC
     cd /tmp
-	tar xvf /tmp/kibana.tar.gz
+    tar xvf /tmp/kibana.tar.gz
     mkdir -p /opt/kibana
     cp -R /tmp/kibana-4*/* /opt/kibana/
   EOC
