@@ -1,7 +1,7 @@
 bash 'Install Java' do
   user 'root'
   code <<-EOC
-    apt-get install python-software-properties -y
+    apt-get install software-properties-common python-software-properties -y
     add-apt-repository ppa:webupd8team/java -y
     apt-get update
     echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
