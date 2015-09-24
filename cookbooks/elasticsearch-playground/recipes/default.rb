@@ -1,9 +1,11 @@
+package ['software-properties-common', 'python-software-properties']
+
 bash 'Install Java' do
   user 'root'
   code <<-EOC
-    apt-get install software-properties-common python-software-properties -y
+    #apt-get install software-properties-common python-software-properties -y
     add-apt-repository ppa:webupd8team/java -y
-    apt-get update
+    #apt-get update
     echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
     echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections
     #sudo apt-get -y install oracle-java7-installer
@@ -32,6 +34,7 @@ remote_file '/tmp/kibana.tar.gz' do
 end
 
 bash 'run_installKibana' do
+  not_if { File.exist? ('/opt/kibana')}
   user 'root'
   code <<-EOC
     cd /tmp
