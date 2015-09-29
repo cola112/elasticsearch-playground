@@ -34,6 +34,7 @@ remote_file '/tmp/kibana.tar.gz' do
   source 'https://download.elastic.co/kibana/kibana/kibana-4.1.2-linux-x64.tar.gz'
   checksum '5f6213f7ac7ef71016a6750f09e7316ccc9bca139bc5389b417395b179bc370c'
   notifies :run, 'bash[run_install-Kibana]', :immediately
+
 end
 
 bash 'run_install-Kibana' do
