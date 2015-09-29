@@ -18,6 +18,12 @@ remote_file '/tmp/elasticsearch.deb' do
   notifies :run, 'execute[run_install-elasticsearch]', :immediately
 end
 
+execute 'run_install-elasticsearch' do
+  command 'dpkg -i /tmp/elasticsearch.deb || apt-get -f install -y'
+  user 'root'
+  action :nothing
+end
+
 bash 'run_start-elasticsearch' do
   user 'root'
   code <<-EOC
